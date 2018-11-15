@@ -1,0 +1,9 @@
+[out:xml][timeout:100];
+{{geocodeArea:Orleans}}->.searchArea;
+(
+way["highway"="path"][!"seasonal"](area.searchArea);
+way["highway"="footway"][!"seasonal"](area.searchArea);
+way["highway"="cycleway"][!"seasonal"](area.searchArea);
+);
+(._;>;);
+out meta;
