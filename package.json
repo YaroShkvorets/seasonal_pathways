@@ -1,0 +1,31 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "generate seasonal tags based on city data",
+  "main": "main.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zzptichka/seasonal_pathways.git"
+  },
+  "keywords": [
+    "seasonal",
+    "pathway",
+    "footway"
+  ],
+  "author": "Yaro Shkvorets",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zzptichka/seasonal_pathways/issues"
+  },
+  "homepage": "https://github.com/zzptichka/seasonal_pathways#readme",
+  "dependencies": {
+    "@turf/turf": "^5.1.6",
+    "cheap-ruler": "^2.5.1",
+    "geojson-rbush": "^3.1.1",
+    "geojson-writer": "^0.3.6",
+    "xmldom": "^0.1.27"
+  }
+}

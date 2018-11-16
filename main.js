@@ -19,7 +19,7 @@ const outPathwaysTooShortPath = "data/generated_pathways_too_short.json"
 
 const kOffsetFromPathwayEnd = 3      //disregard kPathwayTestStep meters from pathway end
 const kPathwayTestStep = 3        //we test every pathways every kPathwayTestStep meters
-const kPointDistanceNearby = 8    //if there is a plowed track within kPointDistanceNearby meters - point is plowed
+const kPointDistanceNearby = 5    //if there is a plowed track within kPointDistanceNearby meters - point is plowed
 const kPointsPlowedThreshold = 0.80 //kPointsPlowedThreshold of pathway points have plowed track nearby -> pathway is plowed
 const kTooShortThreshold = 10       //don't take into account pathways that are shorter than kTooShortThreshold meters
 
@@ -88,8 +88,8 @@ for (let pathway of pathways) {
       pathwaysTooShort.push(pathway);
     }
     else if(pointsTotal && pointsWithPlowTracks>=pointsTotal*kPointsPlowedThreshold){  //kPointsPlowedThreshold of points have sidewalk nearby -> good
-      pathwaysWithPlowTracks.push(pathway);
       pathway.properties.seasonal = 'no'
+      pathwaysWithPlowTracks.push(pathway);
     }
     else{
       pathwaysWithNoPlowTracks.push(pathway)
@@ -103,6 +103,7 @@ for (let pathway of pathways) {
     pointsWithNoPlowTracks>pointsTotal*(1-kPointsPlowedThreshold) &&
     pointsWithNoPlowTracks<pointsTotal*0.5)
   {
+    pathway.properties.seasonal = 'split'
     pathwaysToSplit.push(pathway)
   }
 }

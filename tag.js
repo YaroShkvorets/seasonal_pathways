@@ -4,7 +4,7 @@ var XMLSerializer = require('xmldom').XMLSerializer;
 const fs = require('fs');
 
 
-const inTaggedPathwaysFiles = ["data/generated_pathways_with_plow_tracks.json"]
+const inTaggedPathwaysFiles = ["data/generated_pathways_with_plow_tracks.json"/*,"data/generated_pathways_to_split.json"*/]
 
 const inOsmSource = "data/osm_pathways.osm"
 const outOsmSource = "data/generated_seasonal_pathways.osm"
@@ -20,7 +20,6 @@ for(let i in inTaggedPathwaysFiles){
   for(let feature of tagged_pathways.features) {
     if(feature.properties.seasonal){
       seasonal_tags[feature.properties.id] = feature.properties.seasonal
-      console.log(feature.properties)
     }
   }
 }
@@ -50,8 +49,7 @@ fs.readFile(inOsmSource, 'utf-8', function (err, data) {
       let attr = way.attributes[j]
       if (attr.name=='id') {
         const id = attr.value;
-        const seasonal_tag = seasonal_tags[id];
-        console.log('seasonal tag: ', seasonal_tag)
+        const seasonal_tag = seasonal_tags['way/'+id];
         if(seasonal_tag){
           let replaced = false
           for(let k in way.childNodes){
@@ -75,7 +73,7 @@ fs.readFile(inOsmSource, 'utf-8', function (err, data) {
             tag.setAttribute('v', seasonal_tag);
             way.appendChild(tag)
             way.setAttribute('action', 'modify');
-            console.log(`For way ${id} added seasonal=${seasonal_tag} tag`)
+            //console.log(`For way ${id} added seasonal=${seasonal_tag} tag`)
             totalTagged++
           }
           //console.log('Modified way id#', id, 'sidewalk tag to', seasonal_tag)

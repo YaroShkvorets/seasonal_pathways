@@ -1,9 +1,11 @@
-[out:xml][timeout:100];
-{{geocodeArea:Orleans}}->.searchArea;
+[out:xml][timeout:90];
 (
-way["highway"="path"][!"seasonal"](area.searchArea);
-way["highway"="footway"][!"seasonal"](area.searchArea);
-way["highway"="cycleway"][!"seasonal"](area.searchArea);
+  way["highway"="footway"]["footway"!="crossing"][!"seasonal"](area:3604136816);
+  way["highway"="path"][!"seasonal"](area:3604136816);
+  way["highway"="cycleway"][!"seasonal"](area:3604136816);
 );
 (._;>;);
 out meta;
+
+//3604136816 - Ottawa
+//3606166861 - Orleans
